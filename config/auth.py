@@ -17,6 +17,19 @@ be authenticated.
 """
 
 AUTH = {
-    'driver': env('AUTH_DRIVER', 'cookie'),
-    'model': User,
+    'defaults': {
+        'guard': 'web'
+    },
+    'guards': {
+        'web': {
+            'driver': 'cookie',
+            'model': User,
+            'drivers': { # 'cookie', 'jwt'
+                'jwt': {
+                    'reauthentication': True,
+                    'lifetime': '5 minutes'
+                }
+            }
+        },
+    }
 }
