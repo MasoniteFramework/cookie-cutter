@@ -4,8 +4,10 @@ from masonite.providers import (AppProvider, BroadcastProvider, CacheProvider,
                                 CsrfProvider, HelpersProvider, MailProvider,
                                 QueueProvider, RouteProvider, SassProvider,
                                 SessionProvider, StatusCodeProvider,
-                                UploadProvider, ValidationProvider, ViewProvider,
+                                UploadProvider, ViewProvider,
                                 WhitenoiseProvider)
+
+from masonite.validation.providers import ValidationProvider
 
 """Providers List
 Providers are a simple way to remove or add functionality for Masonite
