@@ -17,6 +17,4 @@ class WelcomeController:
         Returns:
             masonite.view.View -- The Masonite view class.
         """
-        return view.render('welcome', {
-            'app': request.app().make('Application')
-        })
+        return view.render('welcome')
