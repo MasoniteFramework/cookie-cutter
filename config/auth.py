@@ -18,7 +18,7 @@ be authenticated.
 
 AUTH = {
     'defaults': {
-        'guard': 'web'
+        'guard': env('AUTH_GUARD', 'web')
     },
     'guards': {
         'web': {
