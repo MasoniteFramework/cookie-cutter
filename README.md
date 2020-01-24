@@ -11,6 +11,9 @@
 
 </p>
 
+ **NOTE: This repository is the general shell of the framework. This repository is responsible for managing the installation of all new applications. All core framework related code has been abstracted out into it's own PYPI package which can be found [in this GitHub Repo](https://github.com/masoniteframework/core).**
+
+
 ## About Masonite
 
 The modern and developer centric Python web framework that strives for an actual batteries included developer tool with a lot of out of the box functionality with an extremely extendable architecture. Masonite is perfect for beginner developers getting into their first web applications as well as experienced devs that need to utilize the full potential of Masonite to get their applications done.
@@ -28,6 +31,8 @@ Masonite works hard to be fast and easy from install to deployment so developers
 ## Learning Masonite
 
 Masonite strives to have extremely comprehensive documentation. All documentation can be [Found Here](https://docs.masoniteproject.com/v/v2.1/) and would be wise to go through the tutorials there. If you find any discrepencies or anything that doesn't make sense, be sure to comment directly on the documentation to start a discussion!
+
+If you are a visual learner you can find tutorials here: [MasoniteCasts](https://casts.masonite.dev)
 
 Also be sure to join the [Slack channel](http://slack.masoniteproject.com/)!
 
@@ -54,7 +59,7 @@ $ sudo apt-get install python3.6-dev libssl-dev
 
 ## Windows
 
-With windows you will need to have the latest OpenSSL version. Install OpenSSL [32-bit](http://slproweb.com/download/Win32OpenSSL-1_1_0h.exe) or [64-bit](http://slproweb.com/download/Win64OpenSSL-1_1_0h.exe)
+With windows you will need to have the latest OpenSSL version. Install [OpenSSL 32-bit or 64-bit](https://slproweb.com/products/Win32OpenSSL.html).
 
 ## Mac
 
@@ -133,33 +138,34 @@ Getting started is very easy. Below is how you can get a simple Hello World appl
 
 ## Installation
 
+The best way to install Masonite is by starting in a virtual environment first. This will avoid any issues with filesystem permissions.
+
+```
+python3 -m venv venv
+```
+
+Then activate the virtual environment:
+
+```
+WINDOWS: $ ./venv/Scripts/activate
+MAC: $ source venv/bin/activate
+```
+
+
 You can easily create new applications with `craft`. To create a new application run:
 
-    $ craft new project_name
+```
+$ pip install masonite-cli
+$ craft new project .
+```
 
-****
+The `.` will tell craft to create the project in the current directory instead of a new directory.
 
-<p align="center">
-* * * *
-</p>
+```
+$ craft install
+```
 
-NOTE: If you do not have the craft command, you can run `pip install masonite-cli` which will install `craft` command line tool.
-
-<p align="center">
-* * * *
-</p>
-
-****
-
-This command will create a new directory called `project_name` with our new Masonite project.
-
-You can now cd into this directory by doing:
-
-    $ cd project_name
-
-Now we just need to add the pip dependencies. You can run `pip3 install -r "requirements.txt"` or you can run the `craft` command:
-
-    $ craft install
+This will install all of Masonites dependencies as well as create a new `.env` file consisting of all of your environment variables.
 
 ****
 
@@ -176,11 +182,11 @@ NOTE: Python craft commands are essentially wrappers around common mundane tasks
 ****
 
 
-This will install all the required dependencies to run this framework. Now we can run the `craft` command:
+Now we can run the `craft` command:
 
     $ craft serve
 
-This will run the server at `localhost:8000`. Navigating to that URL should show the Masonite welcome message. 
+This will run the server at `localhost:8000` and be in an auto-reloading state. When you change files, your server will restart. Navigating to that URL should show the Masonite welcome message. 
 
 If that port is blocked you can specify a port by running:
 
@@ -189,27 +195,21 @@ If that port is blocked you can specify a port by running:
 Or specify a host by running:
 
     $ craft serve --host 192.168.1.283
-   
-The server can also be auto reloaded by passing in a `-r` flag (short for `--reload`)
-
-    $ craft serve -r
-   
-This will reload the server when Masonite detects file changes. This is very similiar to Django.
 
 ## Hello World
 
 All web routes are in `routes/web.py`. In this file is already the route to the welcome controller. To start your hello world example just add something like:
 
 ```python
-Get().route('/hello/world', 'HelloWorldController@show'),
+Get('/hello/world', 'HelloWorldController@show'),
 ```
 
 our routes constant file should now look something like:
 
 ```python
 ROUTES = [
-    Get().route('/', 'WelcomeController@show'),
-    Get().route('/hello/world', 'HelloWorldController@show'),
+    Get('/', 'WelcomeController@show'),
+    Get('/hello/world', 'HelloWorldController@show'),
 ]
 ```
 
@@ -235,16 +235,14 @@ In order to make the `HelloWorldController` we can use a `craft` command:
 
     $ craft controller HelloWorld
 
-This will scaffold the controller for you and put it in `app/http/controllers/HelloWorldController.py`
-
-We will have a `show()` method by default which is the typical method we will use to "show" our views and content.
+This will scaffold the controller for you and put it in `app/http/controllers/HelloWorldController.py`. This new file will have all the imports for us.
 
 Inside the `HelloWorldController` we can make our `show` method like this:
 
 ```python
-def show(self):
+def show(self, view: View):
     """ Show Hello World Template """
-    return view('helloworld')
+    return view.render('helloworld')
 ```
 
 As you see above, we are returning a `helloworld` template but we do not have that yet. All templates are in `resources/templates`. We can simply make a file called `helloworld.html` or run the `craft` command:

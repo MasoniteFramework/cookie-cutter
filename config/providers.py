@@ -6,6 +6,7 @@ from masonite.providers import (AppProvider, AuthenticationProvider, BroadcastPr
                                 SessionProvider, StatusCodeProvider,
                                 UploadProvider, ViewProvider,
                                 WhitenoiseProvider)
+from masonite.validation.providers.ValidationProvider import ValidationProvider
 
 from masonite.logging.providers import LoggingProvider
 from masonite.validation.providers import ValidationProvider
@@ -35,6 +36,7 @@ PROVIDERS = [
     BroadcastProvider,
     CsrfProvider,
     HelpersProvider,
+    ValidationProvider,
 
     # Third Party Providers
     LoggingProvider,
