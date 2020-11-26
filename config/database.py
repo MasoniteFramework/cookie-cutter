@@ -3,7 +3,8 @@
 import os
 
 from masonite.environment import LoadEnvironment, env
-from masoniteorm.builder import QueryBuilder
+from masoniteorm.query import QueryBuilder
+from masoniteorm.connections import ConnectionResolver
 
 """
 |--------------------------------------------------------------------------
@@ -49,7 +50,7 @@ DATABASES = {
     "sqlite": {"driver": "sqlite", "database": "orm.sqlite3", "prefix": ""},
 }
 
-# DB = QueryBuilder(connection_details=DATABASES)
+db = ConnectionResolver().set_connection_details(DATABASES)
 
 # DATABASES = {
 #     'default': os.environ.get('DB_DRIVER'),
