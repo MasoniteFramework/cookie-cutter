@@ -22,35 +22,31 @@ They can be named whatever you want.
 """
 
 DATABASES = {
-    'default': 'mysql',
-    'mysql': {
-        'driver': 'mysql',
-        'host': 'localhost',
-        'user': 'root',
-        'password': '',
-        'database': 'orm',
-        'port': '3306',
-        'prefix': '',
-        'grammar': 'mysql',
-        'options': {
-            'charset': 'utf8mb4',
+    "default": "mysql",
+    "mysql": {
+        "driver": "mysql",
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "orm",
+        "port": "3306",
+        "prefix": "",
+        "grammar": "mysql",
+        "options": {
+            "charset": "utf8mb4",
         },
     },
-    'postgres': {
-        'driver': 'postgres',
-        'host': 'localhost',
-        'user': 'postgres',
-        'password': 'postgres',
-        'database': 'orm',
-        'port': '5432',
-        'prefix': '',
-        'grammar': 'postgres',
+    "postgres": {
+        "driver": "postgres",
+        "host": "localhost",
+        "user": "postgres",
+        "password": "postgres",
+        "database": "orm",
+        "port": "5432",
+        "prefix": "",
+        "grammar": "postgres",
     },
-    'sqlite': {
-        'driver': 'sqlite',
-        'database': 'orm.sqlite3',
-        'prefix': ''
-    }
+    "sqlite": {"driver": "sqlite", "database": "orm.sqlite3", "prefix": ""},
 }
 
 # DB = QueryBuilder(connection_details=DATABASES)
