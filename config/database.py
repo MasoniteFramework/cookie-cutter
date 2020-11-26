@@ -3,7 +3,7 @@
 import os
 
 from masonite.environment import LoadEnvironment, env
-from masonite.orm.builder import QueryBuilder
+from masoniteorm.builder import QueryBuilder
 
 """
 |--------------------------------------------------------------------------
