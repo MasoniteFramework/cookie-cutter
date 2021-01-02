@@ -50,7 +50,7 @@ DATABASES = {
     "sqlite": {"driver": "sqlite", "database": "orm.sqlite3", "prefix": ""},
 }
 
-db = ConnectionResolver().set_connection_details(DATABASES)
+DB = ConnectionResolver().set_connection_details(DATABASES)
 
 # DATABASES = {
 #     'default': os.environ.get('DB_DRIVER'),
