@@ -1,17 +1,20 @@
 """First Entry For The WSGI Server."""
 
-from src.masonite.app import App
+from masonite.environment import LoadEnvironment
 
-from src.masonite.wsgi import response_handler
-from src.masonite.helpers import config
-from src.masonite.environment import LoadEnvironment
+LoadEnvironment()
+
+from masonite.app import App
+
+from masonite.wsgi import response_handler
+from config import application, providers
 
 """Instantiate Container And Perform Important Bindings
 Some Service providers need important bindings like the WSGI application
 and the application configuration file before they boot.
 """
 
-LoadEnvironment()
+
 
 container = App()
 
