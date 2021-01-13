@@ -5,9 +5,8 @@ from masonite.environment import LoadEnvironment
 LoadEnvironment()
 
 from masonite.app import App
-
+from masonite.helpers import config
 from masonite.wsgi import response_handler
-from config import application, providers
 
 """Instantiate Container And Perform Important Bindings
 Some Service providers need important bindings like the WSGI application
