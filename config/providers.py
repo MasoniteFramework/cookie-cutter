@@ -17,8 +17,6 @@ from masonite.providers import (
     ViewProvider,
     WhitenoiseProvider,
 )
-from masonite.validation.providers.ValidationProvider import ValidationProvider
-
 from masonite.logging.providers import LoggingProvider
 from masonite.validation.providers import ValidationProvider
 
