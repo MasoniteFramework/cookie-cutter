@@ -51,23 +51,3 @@ DATABASES = {
 }
 
 DB = ConnectionResolver().set_connection_details(DATABASES)
-
-# DATABASES = {
-#     'default': os.environ.get('DB_DRIVER'),
-#     'sqlite': {
-#         'driver': 'sqlite',
-#         'database': os.environ.get('DB_DATABASE')
-#     },
-#     'postgres': {
-#         'driver': 'postgres',
-#         'host': env('DB_HOST'),
-#         'database': env('DB_DATABASE'),
-#         'port': env('DB_PORT'),
-#         'user': env('DB_USERNAME'),
-#         'password': env('DB_PASSWORD'),
-#         'log_queries': env('DB_LOG'),
-#     },
-# }
-
-# DB = DatabaseManager(DATABASES)
-# Model.set_connection_resolver(DB)
