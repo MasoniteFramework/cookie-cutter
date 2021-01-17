@@ -23,14 +23,19 @@ They can be named whatever you want.
 """
 
 DATABASES = {
-    "default": "mysql",
+    'default': env('DB_CONNECTION', 'sqlite'),
+    'sqlite': {
+        'driver': 'sqlite',
+        'database': env('SQLITE_DB_DATABASE', 'masonite.sqlite3'),
+        'prefix': ''
+    },
     "mysql": {
         "driver": "mysql",
-        "host": "localhost",
-        "user": "root",
-        "password": "",
-        "database": "orm",
-        "port": "3306",
+        "host": env('DB_HOST'),
+        "user": env("DB_USERNAME"),
+        "password": env("DB_PASSWORD"),
+        "database": env("DB_DATABASE"),
+        "port": env('DB_PORT'),
         "prefix": "",
         "grammar": "mysql",
         "options": {
@@ -39,15 +44,23 @@ DATABASES = {
     },
     "postgres": {
         "driver": "postgres",
-        "host": "localhost",
-        "user": "postgres",
-        "password": "postgres",
-        "database": "orm",
-        "port": "5432",
+        "host": env('DB_HOST'),
+        "user": env("DB_USERNAME"),
+        "password": env("DB_PASSWORD"),
+        "database": env("DB_DATABASE"),
+        "port": env('DB_PORT'),
         "prefix": "",
         "grammar": "postgres",
     },
-    "sqlite": {"driver": "sqlite", "database": "orm.sqlite3", "prefix": ""},
+    'mssql': {
+        'driver': 'mssql',
+        'host': env('MSSQL_DATABASE_HOST'),
+        'user': env('MSSQL_DATABASE_USER'),
+        'password': env('MSSQL_DATABASE_PASSWORD'),
+        'database': env('MSSQL_DATABASE_DATABASE'),
+        'port': env('MSSQL_DATABASE_PORT'),
+        'prefix': ''
+    },
 }
 
 DB = ConnectionResolver().set_connection_details(DATABASES)
