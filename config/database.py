@@ -23,7 +23,12 @@ They can be named whatever you want.
 """
 
 DATABASES = {
-    "default": "mysql",
+    'default': env('DB_CONNECTION', 'sqlite'),
+    'sqlite': {
+        'driver': 'sqlite',
+        'database': env('SQLITE_DB_DATABASE', 'masonite.sqlite3'),
+        'prefix': ''
+    },
     "mysql": {
         "driver": "mysql",
         "host": env('DB_HOST'),
@@ -44,27 +49,15 @@ DATABASES = {
         "port": env('DB_PORT'),
         "prefix": "",
     },
-    "sqlite": {"driver": "sqlite", "database": "orm.sqlite3", "prefix": ""},
+    'mssql': {
+        'driver': 'mssql',
+        'host': env('MSSQL_DATABASE_HOST'),
+        'user': env('MSSQL_DATABASE_USER'),
+        'password': env('MSSQL_DATABASE_PASSWORD'),
+        'database': env('MSSQL_DATABASE_DATABASE'),
+        'port': env('MSSQL_DATABASE_PORT'),
+        'prefix': ''
+    },
 }
 
-db = ConnectionResolver().set_connection_details(DATABASES)
-
-# DATABASES = {
-#     'default': os.environ.get('DB_DRIVER'),
-#     'sqlite': {
-#         'driver': 'sqlite',
-#         'database': os.environ.get('DB_DATABASE')
-#     },
-#     'postgres': {
-#         'driver': 'postgres',
-#         'host': env('DB_HOST'),
-#         'database': env('DB_DATABASE'),
-#         'port': env('DB_PORT'),
-#         'user': env('DB_USERNAME'),
-#         'password': env('DB_PASSWORD'),
-#         'log_queries': env('DB_LOG'),
-#     },
-# }
-
-# DB = DatabaseManager(DATABASES)
-# Model.set_connection_resolver(DB)
+DB = ConnectionResolver().set_connection_details(DATABASES)

@@ -14,7 +14,7 @@ let mix = require('laravel-mix');
 mix.js('storage/static/js/app.js', 'storage/compiled/js')
     .sass('storage/static/sass/style.scss', 'storage/compiled/css');
 
-// Full API
+// for full API refer to https://laravel-mix.com/docs/main/api
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.
 // mix.preact(src, output); <-- Identical to mix.js(), but registers Preact compilation.
