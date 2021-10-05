@@ -1,2 +1,2 @@
-git+https://github.com/MasoniteFramework/masonite4.git
+https://github.com/MasoniteFramework/masonite4/archive/master.zip
 git+https://github.com/girardinsamuel/orm@update/masonite-4 # ORM for Masonite 4

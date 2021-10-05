@@ -70,6 +70,7 @@ class Kernel:
         self.application.bind("config.broadcast", "config.broadcast")
         self.application.bind("config.auth", "config.auth")
         self.application.bind("config.filesystem", "config.filesystem")
+        self.application.bind("config.notification", "config.notification")
 
         self.application.bind("base_url", "http://localhost:8000")
 
