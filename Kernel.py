@@ -53,7 +53,6 @@ class Kernel:
         self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
 
     def register_configurations(self):
-        self.application.bind("base_url", "http://localhost:8000")
         # load configuration
         self.application.bind("config.location", "config")
         configuration = Configuration(self.application)
