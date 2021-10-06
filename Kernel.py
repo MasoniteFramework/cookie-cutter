@@ -2,9 +2,9 @@ import os
 
 from masonite.foundation import response_handler
 from masonite.storage import StorageCapsule
+from masonite.auth import Sign
 from masonite.environment import LoadEnvironment
 from masonite.utils.structures import load_routes
-from masonite.configuration import config
 from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
@@ -12,7 +12,8 @@ from masonite.middleware import (
     LoadUserMiddleware,
 )
 from masonite.routes import Route
-
+from masonite.configuration.Configuration import Configuration
+from masonite.configuration.helpers import config
 
 from app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
@@ -52,16 +53,24 @@ class Kernel:
         self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
 
     def register_configurations(self):
-        self.application.bind("config.location", "app/config")
         self.application.bind("base_url", "http://localhost:8000")
-
-        self.application.bind("jobs.location", "app/jobs")
+        # load configuration
+        self.application.bind("config.location", "config")
+        configuration = Configuration(self.application)
+        configuration.load()
+        self.application.bind("config", configuration)
+        # set locations
         self.application.bind("controller.location", "app.controllers")
+        self.application.bind("jobs.location", "app/jobs")
         self.application.bind("providers.location", "app/providers")
         self.application.bind("mailables.location", "app/mailables")
         self.application.bind("listeners.location", "app/listeners")
         self.application.bind("validation.location", "app/validation")
+
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
+        key = config("application.key")
+        self.application.bind("key", key)
+        self.application.bind("sign", Sign(key))
 
     def register_templates(self):
         self.application.bind("views.location", "templates/")
