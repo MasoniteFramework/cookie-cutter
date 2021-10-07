@@ -65,6 +65,9 @@ class Kernel:
         self.application.bind("mailables.location", "app/mailables")
         self.application.bind("listeners.location", "app/listeners")
         self.application.bind("validation.location", "app/validation")
+        self.application.bind("notifications.location", "app/notifications")
+        self.application.bind("events.location", "app/events")
+        self.application.bind("tasks.location", "app/tasks")
 
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
         key = config("application.key")
