@@ -28,6 +28,7 @@ DATABASES = {
         "driver": "sqlite",
         "database": env("SQLITE_DB_DATABASE", "masonite.sqlite3"),
         "prefix": "",
+        "log_queries": env("DB_LOG"),
     },
     "mysql": {
         "driver": "mysql",
@@ -41,6 +42,7 @@ DATABASES = {
         "options": {
             "charset": "utf8mb4",
         },
+        "log_queries": env("DB_LOG"),
     },
     "postgres": {
         "driver": "postgres",
@@ -51,6 +53,7 @@ DATABASES = {
         "port": env("DB_PORT"),
         "prefix": "",
         "grammar": "postgres",
+        "log_queries": env("DB_LOG"),
     },
     "mssql": {
         "driver": "mssql",
@@ -60,6 +63,7 @@ DATABASES = {
         "database": env("MSSQL_DATABASE_DATABASE"),
         "port": env("MSSQL_DATABASE_PORT"),
         "prefix": "",
+        "log_queries": env("DB_LOG"),
     },
 }
 

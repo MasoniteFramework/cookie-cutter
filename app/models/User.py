@@ -1,5 +1,4 @@
 """User Model."""
-
 from masoniteorm.models import Model
 from masoniteorm.scopes import SoftDeletesMixin
 
