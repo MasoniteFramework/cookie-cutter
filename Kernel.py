@@ -69,9 +69,9 @@ class Kernel:
 
     def register_routes(self):
         Route.set_controller_module_location(self.application.make("controller.location"))
-        self.application.bind("routes.web", "tests/integrations/web")
+        self.application.bind("routes.location", "routes/web")
         self.application.make("router").add(
-            Route.group(load_routes("routes.web"), middleware=["web"])
+            Route.group(load_routes(self.application.make("routes.location")), middleware=["web"])
         )
 
     def register_database(self):
