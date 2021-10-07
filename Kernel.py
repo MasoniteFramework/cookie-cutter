@@ -42,16 +42,6 @@ class Kernel:
     def load_environment(self):
         LoadEnvironment()
 
-    def register_routes(self):
-        Route.set_controller_module_location("app.controllers")
-
-        self.application.make("router").add(
-            Route.group(load_routes("routes.web"), middleware=["web"])
-        )
-
-    def register_middleware(self):
-        self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
-
     def register_configurations(self):
         # load configuration
         self.application.bind("config.location", "config")
@@ -59,7 +49,7 @@ class Kernel:
         configuration.load()
         self.application.bind("config", configuration)
         # set locations
-        self.application.bind("controller.location", "app.controllers")
+        self.application.bind("controller.location", "app/controllers")
         self.application.bind("jobs.location", "app/jobs")
         self.application.bind("providers.location", "app/providers")
         self.application.bind("mailables.location", "app/mailables")
@@ -74,8 +64,15 @@ class Kernel:
         self.application.bind("key", key)
         self.application.bind("sign", Sign(key))
 
-    def register_templates(self):
-        self.application.bind("views.location", "templates/")
+    def register_middleware(self):
+        self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
+
+    def register_routes(self):
+        Route.set_controller_module_location(self.application.make("controller.location"))
+        self.application.bind("routes.web", "tests/integrations/web")
+        self.application.make("router").add(
+            Route.group(load_routes("routes.web"), middleware=["web"])
+        )
 
     def register_database(self):
         from masoniteorm.query import QueryBuilder
@@ -91,6 +88,9 @@ class Kernel:
         from config.database import DB
 
         self.application.bind("resolver", DB)
+
+    def register_templates(self):
+        self.application.bind("views.location", "templates/")
 
     def register_storage(self):
         storage = StorageCapsule(self.application.base_path)
