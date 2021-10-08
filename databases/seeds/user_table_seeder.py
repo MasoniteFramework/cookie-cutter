@@ -1,7 +1,7 @@
 """UserTableSeeder Seeder."""
-
 from masoniteorm.seeds import Seeder
-from tests.integrations.app.User import User
+
+from app.models.User import User
 
 
 class UserTableSeeder(Seeder):

@@ -1,7 +1,7 @@
-import os
 from masonite.environment import env
 
-KEY = os.getenv("APP_KEY", "-RkDOqXojJIlsF_I8wWiUq_KRZ0PtGWTOZ676u5HtLg=")
+
+KEY = env("APP_KEY", "-RkDOqXojJIlsF_I8wWiUq_KRZ0PtGWTOZ676u5HtLg=")
 
 HASHING = {
     "default": env("HASHING_FUNCTION", "bcrypt"),
@@ -9,4 +9,4 @@ HASHING = {
     "argon2": {"memory": 1024, "threads": 2, "time": 2},
 }
 
-APP_URL = os.getenv("APP_URL", "http://localhost:8000/")
+APP_URL = env("APP_URL", "http://localhost:8000/")
