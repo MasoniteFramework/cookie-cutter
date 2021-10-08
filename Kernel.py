@@ -1,10 +1,9 @@
 import os
-
 from masonite.foundation import response_handler
 from masonite.storage import StorageCapsule
 from masonite.auth import Sign
 from masonite.environment import LoadEnvironment
-from masonite.utils.structures import load_routes
+from masonite.utils.structures import load
 from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
@@ -13,7 +12,7 @@ from masonite.middleware import (
 )
 from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
-from masonite.configuration.helpers import config
+from masonite.configuration import config
 
 from app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
@@ -48,8 +47,11 @@ class Kernel:
         configuration = Configuration(self.application)
         configuration.load()
         self.application.bind("config", configuration)
+        key = config("application.key")
+        self.application.bind("key", key)
+        self.application.bind("sign", Sign(key))
         # set locations
-        self.application.bind("controller.location", "app/controllers")
+        self.application.bind("controllers.location", "app/controllers")
         self.application.bind("jobs.location", "app/jobs")
         self.application.bind("providers.location", "app/providers")
         self.application.bind("mailables.location", "app/mailables")
@@ -60,18 +62,17 @@ class Kernel:
         self.application.bind("tasks.location", "app/tasks")
 
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
-        key = config("application.key")
-        self.application.bind("key", key)
-        self.application.bind("sign", Sign(key))
 
     def register_middleware(self):
         self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
 
     def register_routes(self):
-        Route.set_controller_module_location(self.application.make("controller.location"))
+        Route.set_controller_module_location(self.application.make("controllers.location"))
         self.application.bind("routes.location", "routes/web")
         self.application.make("router").add(
-            Route.group(load_routes(self.application.make("routes.location")), middleware=["web"])
+            Route.group(
+                load(self.application.make("routes.location"), "ROUTES"), middleware=["web"]
+            )
         )
 
     def register_database(self):
@@ -85,9 +86,7 @@ class Kernel:
         self.application.bind("migrations.location", "app/databases/migrations")
         self.application.bind("seeds.location", "app/databases/seeds")
 
-        from config.database import DB
-
-        self.application.bind("resolver", DB)
+        self.application.bind("resolver", config("database.db"))
 
     def register_templates(self):
         self.application.bind("views.location", "templates/")

@@ -7,5 +7,5 @@ successfully import commands for you.
 
 from wsgi import application
 
-if __name__ == '__main__':
-    application.make('commands').run()
+if __name__ == "__main__":
+    application.make("commands").run()
