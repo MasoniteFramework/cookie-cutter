@@ -1,9 +1,9 @@
-import os
 from masonite.foundation import response_handler
 from masonite.storage import StorageCapsule
 from masonite.auth import Sign
 from masonite.environment import LoadEnvironment
 from masonite.utils.structures import load
+from masonite.utils.location import base_path
 from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
@@ -92,7 +92,7 @@ class Kernel:
         self.application.bind("views.location", "templates/")
 
     def register_storage(self):
-        storage = StorageCapsule(self.application.base_path)
+        storage = StorageCapsule()
         storage.add_storage_assets(
             {
                 # folder          # template alias
@@ -105,4 +105,4 @@ class Kernel:
         self.application.bind("storage_capsule", storage)
 
         self.application.set_response_handler(response_handler)
-        self.application.use_storage_path(os.path.join(self.application.base_path, "storage"))
+        self.application.use_storage_path(base_path("storage"))
