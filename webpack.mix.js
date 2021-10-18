@@ -2,6 +2,7 @@
 applications. By default, we are compiling the CSS file for the application as well as
 bundling up all the JS files. */
 const mix = require('laravel-mix')
+const path = require('path')
 
 
 mix.js('resources/js/app.js', 'storage/compiled/js')
