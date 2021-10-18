@@ -67,7 +67,7 @@ class Kernel:
         self.application.make("middleware").add(self.route_middleware).add(self.http_middleware)
 
     def register_routes(self):
-        Route.set_controller_module_location(self.application.make("controllers.location"))
+        Route.set_controller_locations(self.application.make("controllers.location"))
         self.application.bind("routes.location", "routes/web")
         self.application.make("router").add(
             Route.group(
