@@ -7,7 +7,6 @@ from masonite.utils.location import base_path
 from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
-    VerifyCsrfToken,
     LoadUserMiddleware,
 )
 from masonite.routes import Route
