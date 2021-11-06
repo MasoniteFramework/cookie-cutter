@@ -12,6 +12,7 @@ from masonite.middleware import (
 from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
 from masonite.configuration import config
+from config.filesystem import STATICFILES
 
 from app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
@@ -92,15 +93,7 @@ class Kernel:
 
     def register_storage(self):
         storage = StorageCapsule()
-        storage.add_storage_assets(
-            {
-                # folder          # template alias
-                "storage/static": "static/",
-                "storage/compiled": "static/",
-                "storage/uploads": "static/",
-                "storage/public": "/",
-            }
-        )
+        storage.add_storage_assets(STATICFILES)
         self.application.bind("storage_capsule", storage)
 
         self.application.set_response_handler(response_handler)
