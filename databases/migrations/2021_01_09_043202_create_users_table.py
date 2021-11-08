@@ -14,6 +14,7 @@ class CreateUsersTable(Migration):
             table.string("phone").nullable()
             table.timestamp("verified_at").nullable()
             table.timestamps()
+            table.soft_deletes()
 
     def down(self):
         """Revert the migrations."""
