@@ -15,13 +15,13 @@ from masonite.providers import (
     AuthenticationProvider,
     AuthorizationProvider,
     HashServiceProvider,
+    ORMProvider,
 )
 
 
 from masonite.scheduling.providers import ScheduleProvider
 from masonite.notification.providers import NotificationProvider
 from masonite.validation.providers import ValidationProvider
-from masoniteorm.providers import ORMProvider
 
 PROVIDERS = [
     FrameworkProvider,
