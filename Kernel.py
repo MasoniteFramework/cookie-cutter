@@ -52,6 +52,7 @@ class Kernel:
         self.application.bind("key", key)
         self.application.bind("sign", Sign(key))
         # set locations
+        self.application.bind("resources.location", "resources/")
         self.application.bind("controllers.location", "app/controllers")
         self.application.bind("jobs.location", "app/jobs")
         self.application.bind("providers.location", "app/providers")
