@@ -62,6 +62,7 @@ class Kernel:
         self.application.bind("tasks.location", "app/tasks")
         self.application.bind("models.location", "app/models")
         self.application.bind("observers.location", "app/models/observers")
+        self.application.bind("policies.location", "app/policies")
 
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
 
