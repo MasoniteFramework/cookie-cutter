@@ -85,8 +85,8 @@ class Kernel:
             QueryBuilder(connection_details=config("database.databases")),
         )
 
-        self.application.bind("migrations.location", "app/databases/migrations")
-        self.application.bind("seeds.location", "app/databases/seeds")
+        self.application.bind("migrations.location", "databases/migrations")
+        self.application.bind("seeds.location", "databases/seeds")
 
         self.application.bind("resolver", config("database.db"))
 
