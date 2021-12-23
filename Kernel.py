@@ -8,6 +8,7 @@ from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
     LoadUserMiddleware,
+    MaintenanceModeMiddleware,
 )
 from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
@@ -19,7 +20,7 @@ from app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
 class Kernel:
 
-    http_middleware = [EncryptCookies]
+    http_middleware = [MaintenanceModeMiddleware, EncryptCookies]
 
     route_middleware = {
         "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
