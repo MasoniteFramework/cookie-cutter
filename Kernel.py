@@ -8,6 +8,7 @@ from masonite.middleware import (
     SessionMiddleware,
     EncryptCookies,
     LoadUserMiddleware,
+    MaintenanceModeMiddleware,
 )
 from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
@@ -19,7 +20,7 @@ from app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
 class Kernel:
 
-    http_middleware = [EncryptCookies]
+    http_middleware = [MaintenanceModeMiddleware, EncryptCookies]
 
     route_middleware = {
         "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
@@ -51,6 +52,7 @@ class Kernel:
         self.application.bind("key", key)
         self.application.bind("sign", Sign(key))
         # set locations
+        self.application.bind("resources.location", "resources/")
         self.application.bind("controllers.location", "app/controllers")
         self.application.bind("jobs.location", "app/jobs")
         self.application.bind("providers.location", "app/providers")
@@ -62,6 +64,9 @@ class Kernel:
         self.application.bind("tasks.location", "app/tasks")
         self.application.bind("models.location", "app/models")
         self.application.bind("observers.location", "app/models/observers")
+        self.application.bind("policies.location", "app/policies")
+        self.application.bind("commands.location", "app/commands")
+        self.application.bind("middlewares.location", "app/middlewares")
 
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
 
@@ -85,8 +90,8 @@ class Kernel:
             QueryBuilder(connection_details=config("database.databases")),
         )
 
-        self.application.bind("migrations.location", "app/databases/migrations")
-        self.application.bind("seeds.location", "app/databases/seeds")
+        self.application.bind("migrations.location", "databases/migrations")
+        self.application.bind("seeds.location", "databases/seeds")
 
         self.application.bind("resolver", config("database.db"))
 
