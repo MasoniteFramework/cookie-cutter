@@ -1,2 +1,2 @@
-https://github.com/MasoniteFramework/masonite4/archive/master.zip
-https://github.com/MasoniteFramework/orm/archive/2.0.zip # ORM for Masonite 4
+masonite>=4.0,<5.0
+masonite-orm>=2.0,<3.0
