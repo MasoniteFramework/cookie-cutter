@@ -15,7 +15,7 @@ from masonite.configuration.Configuration import Configuration
 from masonite.configuration import config
 from config.filesystem import STATICFILES
 
-from app.middleware.VerifyCsrfToken import VerifyCsrfToken
+from app.middlewares.VerifyCsrfToken import VerifyCsrfToken
 
 
 class Kernel:
