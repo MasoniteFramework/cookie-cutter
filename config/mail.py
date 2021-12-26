@@ -1,6 +1,8 @@
 from masonite.environment import env
 
 
+FROM_EMAIL = env("FROM_EMAIL", "no-reply@masonite.com")
+
 DRIVERS = {
     "default": env("MAIL_DRIVER", "terminal"),
     "smtp": {
@@ -8,9 +10,14 @@ DRIVERS = {
         "port": env("MAIL_PORT"),
         "username": env("MAIL_USERNAME"),
         "password": env("MAIL_PASSWORD"),
+        "from": FROM_EMAIL,
     },
     "mailgun": {
         "domain": env("MAILGUN_DOMAIN"),
         "secret": env("MAILGUN_SECRET"),
+        "from": FROM_EMAIL,
+    },
+    "terminal": {
+        "from": FROM_EMAIL,
     },
 }
