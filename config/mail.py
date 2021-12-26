@@ -1,7 +1,7 @@
 from masonite.environment import env
 
 
-FROM_EMAIL = env("FROM_EMAIL", "no-reply@masonite.com")
+FROM_EMAIL = env("MAIL_FROM", "no-reply@masonite.com")
 
 DRIVERS = {
     "default": env("MAIL_DRIVER", "terminal"),
