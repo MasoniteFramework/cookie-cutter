@@ -1,2 +1,2 @@
 
-require("./boostrap.js")
+require("./bootstrap.js")
