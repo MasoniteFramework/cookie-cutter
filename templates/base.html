@@ -11,10 +11,14 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    {% block head %}{% endblock %}
+    {% block head %}
+    <!-- <link rel="stylesheet" href="/assets/css/app.css"> -->
+    {% endblock %}
   </head>
   <body>
     {% block content %}{% endblock %}
-    {% block js %}{% endblock %}
+    {% block js %}
+    <!-- <script src="/assets/js/app.js"></script> -->
+    {% endblock %}
   </body>
 </html>
