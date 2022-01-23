@@ -10,6 +10,9 @@ mix.js('resources/js/app.js', 'storage/compiled/js')
     //
   ])
 
+// ensure root directory of mix is project root
+mix.setPublicPath(".")
+
 // add an alias to js code
 mix.alias({
   "@": path.resolve("resources/js/"),
