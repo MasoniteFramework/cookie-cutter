@@ -14,7 +14,7 @@ from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
 from masonite.configuration import config
 
-from app.middlewares.VerifyCsrfToken import VerifyCsrfToken
+from app.middlewares import VerifyCsrfToken, AuthenticationMiddleware
 
 
 class Kernel:
@@ -23,6 +23,7 @@ class Kernel:
 
     route_middleware = {
         "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
+        "auth": [AuthenticationMiddleware],
     }
 
     def __init__(self, app):
