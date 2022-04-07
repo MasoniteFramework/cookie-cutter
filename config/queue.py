@@ -19,8 +19,13 @@ DRIVERS = {
         "port": "5672",
         "vhost": "",
         "host": "localhost",
+        "exchange": "",
+        # See https://pika.readthedocs.io/en/stable/modules/parameters.html#pika.connection.URLParameters 
+        # for valid connection options values
+        "connection_options": {},
         "channel": "default",
         "queue": "masonite4",
+        "tz": "UTC",
     },
     "async": {
         "blocking": True,
