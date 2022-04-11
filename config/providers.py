@@ -23,6 +23,8 @@ from masonite.scheduling.providers import ScheduleProvider
 from masonite.notification.providers import NotificationProvider
 from masonite.validation.providers import ValidationProvider
 
+from app.providers import AppProvider
+
 PROVIDERS = [
     FrameworkProvider,
     HelpersProvider,
@@ -43,5 +45,6 @@ PROVIDERS = [
     AuthenticationProvider,
     ValidationProvider,
     AuthorizationProvider,
-    ORMProvider
+    ORMProvider,
+    AppProvider,
 ]
