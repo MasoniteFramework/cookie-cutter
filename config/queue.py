@@ -1,8 +1,8 @@
-# from masonite.environment import env
+from masonite.environment import env
 
 
 DRIVERS = {
-    "default": "async",
+    "default": env("QUEUE_DRIVER", "async"),
     "database": {
         "connection": "sqlite",
         "table": "jobs",
@@ -11,19 +11,22 @@ DRIVERS = {
         "poll": 5,
     },
     "redis": {
-        #
+        "name": env("QUEUE_USERNAME", "guest"),
+        "password": env("QUEUE_PASSWORD", "guest"),
+        "port": env("QUEUE_PORT", "6379"),
+        "host": env("QUEUE_HOST", "localhost"),
     },
     "amqp": {
-        "username": "guest",
-        "password": "guest",
-        "port": "5672",
-        "vhost": "",
-        "host": "localhost",
+        "username": env("QUEUE_USERNAME", "guest"),
+        "password": env("QUEUE_PASSWORD", "guest"),
+        "port": env("QUEUE_PORT", "5672"),
+        "vhost": env("QUEUE_VHOST", ""),
+        "host": env("QUEUE_HOST", "localhost"),
         "exchange": "",
-        # See https://pika.readthedocs.io/en/stable/modules/parameters.html#pika.connection.URLParameters 
+        # See https://pika.readthedocs.io/en/stable/modules/parameters.html#pika.connection.URLParameters
         # for valid connection options values
         "connection_options": {},
-        "channel": "default",
+        "channel": env("QUEUE_CHANNEL", "default"),
         "queue": "masonite4",
         "tz": "UTC",
     },
