@@ -10,6 +10,7 @@ OPTIONS = {
 }
 
 HANDLERS = {
+    "context": True,
     "dumps": True,
     "solutions": {
         "stackoverflow": False,
