@@ -15,6 +15,8 @@ from masonite.providers import (
     AuthenticationProvider,
     AuthorizationProvider,
     HashServiceProvider,
+    PresetsProvider,
+    SecurityProvider,
     ORMProvider,
 )
 
@@ -28,6 +30,7 @@ from app.providers import AppProvider
 PROVIDERS = [
     FrameworkProvider,
     HelpersProvider,
+    SecurityProvider,
     RouteProvider,
     ViewProvider,
     WhitenoiseProvider,
@@ -44,6 +47,7 @@ PROVIDERS = [
     HashServiceProvider,
     AuthenticationProvider,
     ValidationProvider,
+    PresetsProvider,
     AuthorizationProvider,
     ORMProvider,
     AppProvider,
